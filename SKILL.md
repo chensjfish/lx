@@ -155,10 +155,10 @@ python scripts/lixiang_stores.py --province 广东 --output json > guangdong.jso
 
 ```bash
 # 方式 1: 直接 clone 到 WorkBuddy skills 目录
-git clone https://github.com/chensjfish/lixiang-store-skill.git ~/.workbuddy/skills/lixiang-stores
+git clone https://github.com/chensjfish/lx.git ~/.workbuddy/skills/lixiang-stores
 
 # 方式 2: 仅下载脚本
-curl -O https://raw.githubusercontent.com/chensjfish/lixiang-store-skill/main/scripts/lixiang_stores.py
+curl -O https://raw.githubusercontent.com/chensjfish/lx/main/scripts/lixiang_stores.py
 python lixiang_stores.py --list-provinces
 ```
 

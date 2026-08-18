@@ -2,6 +2,10 @@
 
 > 查询理想汽车全国 1300+ 家门店信息的命令行工具与 WorkBuddy Skill。
 
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
+[![Python 3.6+](https://img.shields.io/badge/python-3.6+-blue.svg)](https://www.python.org/downloads/)
+[![Platform](https://img.shields.io/badge/platform-windows%20%7C%20macos%20%7C%20linux-lightgrey.svg)](#)
+
 数据源: 理想汽车官网公开接口 `https://www.lixiang.com/saos-store-web/tur_store/v1-0/service-centers`
 
 ## ✨ 功能特性
@@ -19,13 +23,13 @@
 ### 方式 1: 作为 WorkBuddy Skill 安装
 
 ```bash
-git clone https://github.com/chensjfish/lixiang-store-skill.git ~/.workbuddy/skills/lixiang-stores
+git clone https://github.com/chensjfish/lx.git ~/.workbuddy/skills/lixiang-stores
 ```
 
 ### 方式 2: 仅下载脚本
 
 ```bash
-curl -O https://raw.githubusercontent.com/chensjfish/lixiang-store-skill/main/scripts/lixiang_stores.py
+curl -O https://raw.githubusercontent.com/chensjfish/lx/main/scripts/lixiang_stores.py
 python lixiang_stores.py --list-provinces
 ```
 
