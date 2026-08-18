@@ -1,6 +1,6 @@
 # lixiang-store-skill
 
-> 查询理想汽车全国 1300+ 家门店信息的命令行工具与 WorkBuddy Skill。
+> 查询理想汽车全国 1300+ 家门店信息的命令行工具, 同时提供 SKILL.md 可作为 Agent Skill 使用。
 
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 [![Python 3.6+](https://img.shields.io/badge/python-3.6+-blue.svg)](https://www.python.org/downloads/)
@@ -16,14 +16,16 @@
 - 📦 多种输出: 人类可读文本 / JSON / CSV
 - ⚡ 10 分钟本地缓存, 避免重复请求
 - 🐍 纯 Python 标准库实现, 无第三方依赖
-- 🧩 可作为 WorkBuddy Skill 被对话调用
+- 🧩 提供 SKILL.md, 可接入各类 Agent / 对话式助手
 
 ## 📦 安装
 
-### 方式 1: 作为 WorkBuddy Skill 安装
+### 方式 1: 克隆仓库使用
 
 ```bash
-git clone https://github.com/chensjfish/lx.git ~/.workbuddy/skills/lixiang-stores
+git clone https://github.com/chensjfish/lx.git
+cd lx
+python scripts/lixiang_stores.py --list-provinces
 ```
 
 ### 方式 2: 仅下载脚本
@@ -106,6 +108,7 @@ python scripts/lixiang_stores.py --city 上海 --type DELIVER --output json \
 |------|------|
 | `--force-refresh` | 忽略缓存, 重新请求 API |
 | `--no-cache` | 不读取缓存(但仍会写入) |
+| `--cache-dir <dir>` | 自定义缓存目录, 覆盖默认路径 |
 
 ### 门店类型枚举
 
@@ -131,7 +134,7 @@ python scripts/lixiang_stores.py --city 上海 --type DELIVER --output json \
 
 ```
 lixiang-store-skill/
-├── SKILL.md                      # WorkBuddy Skill 入口文件
+├── SKILL.md                      # Agent Skill 入口文件
 ├── scripts/
 │   └── lixiang_stores.py         # 主脚本
 ├── references/
@@ -170,9 +173,9 @@ id,name,type,status,provinceName,cityName,countyName,address,telephone,openingHo
 DSHA04,理想汽车上海浦东交付中心,DELIVER,INBUSINESS,上海,上海,浦东,上海市浦东申江南路3588号,18862708111,9:00-18:00,,31.10248,121.64996
 ```
 
-## 🧩 作为 WorkBuddy Skill 使用
+## 🧩 作为 Agent Skill 使用
 
-安装到 `~/.workbuddy/skills/lixiang-stores` 后, 可在 WorkBuddy 对话中直接触发:
+本仓库包含 `SKILL.md`, 可被支持该规范的 Agent / 助手直接加载, 对话中即可触发:
 
 - "北京有哪些理想汽车门店?"
 - "深圳南山区附近 5 公里内的理想门店"

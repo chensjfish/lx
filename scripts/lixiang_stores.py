@@ -36,8 +36,24 @@ import urllib.request
 from datetime import datetime
 
 API_URL = "https://www.lixiang.com/saos-store-web/tur_store/v1-0/service-centers"
-CACHE_DIR = os.path.join(os.path.expanduser("~"), ".workbuddy", "cache", "lixiang-stores")
 CACHE_TTL_SECONDS = 600  # 10 分钟
+
+
+def default_cache_dir():
+    """返回跨平台的默认缓存目录, 可用环境变量 LIXIANG_STORES_CACHE_DIR 覆盖"""
+    env = os.environ.get("LIXIANG_STORES_CACHE_DIR")
+    if env:
+        return env
+    if sys.platform == "win32":
+        base = os.environ.get("LOCALAPPDATA") or os.path.expanduser("~")
+        return os.path.join(base, "lixiang-stores")
+    if sys.platform == "darwin":
+        return os.path.join(os.path.expanduser("~"), "Library", "Caches", "lixiang-stores")
+    base = os.environ.get("XDG_CACHE_HOME") or os.path.join(os.path.expanduser("~"), ".cache")
+    return os.path.join(base, "lixiang-stores")
+
+
+CACHE_DIR = default_cache_dir()
 
 # 门店类型中文映射
 TYPE_LABELS = {
@@ -335,12 +351,17 @@ def build_parser():
     parser.add_argument("--list-statuses", action="store_true", help="列出所有门店状态分布")
     parser.add_argument("--force-refresh", action="store_true", help="忽略缓存, 重新请求 API")
     parser.add_argument("--no-cache", action="store_true", help="不读取缓存(但仍会写入)")
+    parser.add_argument("--cache-dir", help="自定义缓存目录, 覆盖默认路径")
     return parser
 
 
 def main():
+    global CACHE_DIR
     parser = build_parser()
     args = parser.parse_args()
+
+    if args.cache_dir:
+        CACHE_DIR = args.cache_dir
 
     try:
         stores, from_cache = fetch_stores(force_refresh=args.force_refresh or args.no_cache)

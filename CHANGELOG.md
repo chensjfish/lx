@@ -15,4 +15,4 @@ and this project adheres to [Semantic Versioning](https://semver.org/lang/zh-CN/
 - 支持 text / json / csv 三种输出格式
 - 支持自定义字段输出
 - 提供 `--list-provinces` / `--list-cities` / `--list-types` / `--list-statuses` 列表统计
-- 作为 WorkBuddy Skill 集成
+- 作为 Agent Skill / 独立命令行工具使用

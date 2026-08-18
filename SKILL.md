@@ -116,6 +116,7 @@ python scripts/lixiang_stores.py [过滤参数] [输出参数]
 |------|------|
 | `--force-refresh` | 忽略缓存, 重新请求 API |
 | `--no-cache` | 不读取缓存(但仍会写入) |
+| `--cache-dir <dir>` | 自定义缓存目录, 覆盖默认路径 |
 
 ## 使用示例
 
@@ -154,8 +155,10 @@ python scripts/lixiang_stores.py --province 广东 --output json > guangdong.jso
 ## 安装方法
 
 ```bash
-# 方式 1: 直接 clone 到 WorkBuddy skills 目录
-git clone https://github.com/chensjfish/lx.git ~/.workbuddy/skills/lixiang-stores
+# 方式 1: 克隆仓库
+git clone https://github.com/chensjfish/lx.git
+cd lx
+python scripts/lixiang_stores.py --list-provinces
 
 # 方式 2: 仅下载脚本
 curl -O https://raw.githubusercontent.com/chensjfish/lx/main/scripts/lixiang_stores.py
