@@ -1,0 +1,3 @@
+id,name,type,status,provinceName,cityName,countyName,address,telephone,openingHours,openedAt,lat,lng
+DSHA04,理想汽车上海浦东交付中心,DELIVER,INBUSINESS,上海,上海,浦东,上海市浦东申江南路3588号,18862708111,9:00-18:00,,31.10248,121.64996
+DSHA05,理想汽车上海青浦交付中心,DELIVER,INBUSINESS,上海,上海,宝山,上海市青浦区赵巷镇盈港东路4369弄1号楼1001室到1008室,4006860900,9:00-18:00,,31.168646,121.238226
