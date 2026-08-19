@@ -11,7 +11,7 @@
 ## ✨ 功能特性
 
 - 🚀 一次性拉取全国 1353+ 家理想门店数据
-- 🎯 多维度过滤: 省 / 市 / 区 / 门店类型 / 状态 / 关键字 / 车型 / 附近坐标
+- 🎯 多维度过滤: 省 / 市 / 区 / 门店类型 / 门店类别(销售/售后/交付) / 状态 / 关键字 / 车型 / 附近坐标
 - 📍 经纬度附近查询, 支持 Haversine 距离计算与排序
 - 📦 多种输出: 人类可读文本 / JSON / CSV
 - ⚡ 10 分钟本地缓存, 避免重复请求
@@ -77,6 +77,7 @@ python scripts/lixiang_stores.py --city 上海 --type DELIVER --output json \
 | `--city` | 城市名 | `--city 深圳` |
 | `--district` | 区/县名 | `--district 南山` |
 | `--type` | 门店类型代码 | `--type RETAIL` |
+| `--category` | 门店类别: sales/aftersale/delivery | `--category aftersale` |
 | `--status` | 门店状态代码 | `--status INBUSINESS` |
 | `--keyword` | 关键字(匹配门店名/地址) | `--keyword 万象城` |
 | `--series` | 车型名 | `--series 理想L9` |
@@ -129,6 +130,16 @@ python scripts/lixiang_stores.py --city 上海 --type DELIVER --output json \
 | INBUSINESS | 营业中 |
 | INCONSTRUCTION | 筹建中 |
 | CLOSED | 已关闭 |
+
+### 门店类别(业务口径筛选)
+
+用 `--category` 按销售/售后/交付筛选, **综合门店(UNION) 同时属于三类**:
+
+| 类别 | 参数值 | 包含类型 |
+|------|--------|----------|
+| 销售门店 | `sales` | RETAIL + UNION |
+| 售后门店 | `aftersale` | AFTERSALE + SPRAY + TEMPORARY_AFTERSALE_SUPPORT + UNION |
+| 交付门店 | `delivery` | DELIVER + TEMPORARY_DELIVER + UNION |
 
 ## 📁 项目结构
 

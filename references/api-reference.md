@@ -103,6 +103,16 @@ GET https://www.lixiang.com/saos-store-web/tur_store/v1-0/service-centers
 | INCONSTRUCTION | 筹建中 |
 | CLOSED | 已关闭 |
 
+### 门店类别(脚本筛选口径)
+
+脚本 `--category` 参数按业务口径把 7 种 type 归为销售/售后/交付三类, **综合门店(UNION) 同时属于三类**:
+
+| 类别 | 参数值 | 包含 type |
+|------|--------|-----------|
+| 销售门店 | `sales` | RETAIL, UNION |
+| 售后门店 | `aftersale` | AFTERSALE, SPRAY, TEMPORARY_AFTERSALE_SUPPORT, UNION |
+| 交付门店 | `delivery` | DELIVER, TEMPORARY_DELIVER, UNION |
+
 ## 响应示例(单条)
 
 ```json

@@ -5,6 +5,12 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/zh-CN/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/lang/zh-CN/spec/v2.0.0.html).
 
+## [1.1.0] - 2026-08-19
+
+### Added
+- 新增 `--category` 门店类别筛选: `sales`(销售) / `aftersale`(售后) / `delivery`(交付)
+- 综合门店(UNION) 同时属于销售/售后/交付三类
+
 ## [1.0.0] - 2026-08-18
 
 ### Added

@@ -1,7 +1,7 @@
 ---
 name: lixiang-stores
-version: 1.0.0
-summary: 查询理想汽车全国 1300+ 家门店(零售/交付/售后/喷涂/综合)的信息, 支持省市区/类型/状态/关键字/坐标附近查询, 可导出 JSON/CSV
+version: 1.1.0
+summary: 查询理想汽车全国 1300+ 家门店(零售/交付/售后/喷涂/综合)的信息, 支持省市区/类型/状态/关键字/坐标附近查询, 支持按门店类别(销售/售后/交付)筛选, 可导出 JSON/CSV
 triggered_when:
   - 查询理想汽车门店
   - 理想汽车 4S 店 / 零售中心 / 交付中心 / 售后中心
@@ -9,6 +9,7 @@ triggered_when:
   - 理想汽车门店地址电话
   - 某城市/某地附近的理想门店
   - 理想汽车试驾车 / 试驾车型
+  - 理想汽车销售门店 / 售后门店 / 交付门店
   - 导出理想汽车门店数据
   - Li Auto store / showroom / delivery center
   - lixiang store
@@ -43,6 +44,16 @@ triggered_when:
 | INBUSINESS | 营业中 |
 | INCONSTRUCTION | 筹建中 |
 | CLOSED | 已关闭 |
+
+## 门店类别(业务口径筛选)
+
+按销售/售后/交付三类门店筛选, 用 `--category` 参数。注意: **综合门店(UNION) 同时属于三类**, 即"销售 + 售后 + 交付"三合一。
+
+| 类别 | 参数值 | 包含的门店类型 |
+|------|--------|----------------|
+| 销售门店 | `sales` | 零售中心(RETAIL) + 综合门店(UNION) |
+| 售后门店 | `aftersale` | 售后中心(AFTERSALE) + 喷涂中心(SPRAY) + 临时售后支持(TEMPORARY_AFTERSALE_SUPPORT) + 综合门店(UNION) |
+| 交付门店 | `delivery` | 交付中心(DELIVER) + 临时交付(TEMPORARY_DELIVER) + 综合门店(UNION) |
 
 ## 字段说明
 
@@ -85,6 +96,7 @@ python scripts/lixiang_stores.py [过滤参数] [输出参数]
 | `--city` | 城市名 | `--city 深圳` |
 | `--district` | 区/县名 | `--district 南山` |
 | `--type` | 门店类型代码 | `--type RETAIL` |
+| `--category` | 门店类别: sales/aftersale/delivery | `--category aftersale` |
 | `--status` | 门店状态代码 | `--status INBUSINESS` |
 | `--keyword` | 关键字(匹配门店名/地址) | `--keyword 万象城` |
 | `--series` | 车型名 | `--series 理想L9` |
@@ -127,6 +139,12 @@ python scripts/lixiang_stores.py --list-provinces
 # 查询北京所有零售中心
 python scripts/lixiang_stores.py --city 北京 --type RETAIL
 
+# 查询全国售后门店(含综合门店)
+python scripts/lixiang_stores.py --category aftersale
+
+# 查询广东的销售门店(含综合门店)
+python scripts/lixiang_stores.py --province 广东 --category sales
+
 # 查询上海浦东交付中心, 输出 CSV
 python scripts/lixiang_stores.py --city 上海 --district 浦东 --type DELIVER --output csv
 
@@ -151,6 +169,7 @@ python scripts/lixiang_stores.py --province 广东 --output json > guangdong.jso
 - "导出上海所有理想交付中心的 CSV"
 - "理想汽车门店最多的省份是哪个?"
 - "查一下广州万象城有没有理想门店"
+- "全国有多少理想汽车售后门店 / 销售门店 / 交付门店"
 
 ## 安装方法
 

@@ -8,7 +8,7 @@
 
 特性:
 - 一次性拉取全部门店数据, 在本地做过滤, 无需多次请求
-- 支持按 省/市/区/类型/状态/关键字 过滤
+- 支持按 省/市/区/类型/状态/关键字/门店类别 过滤
 - 支持按经纬度查询附近门店(指定半径)
 - 支持导出为 JSON / CSV
 - 内置 10 分钟本地缓存, 避免重复请求
@@ -21,6 +21,7 @@
     python lixiang_stores.py --keyword 万象城 --output csv
     python lixiang_stores.py --list-provinces
     python lixiang_stores.py --list-cities 广东
+    python lixiang_stores.py --category aftersale
 """
 
 import argparse
@@ -71,6 +72,13 @@ STATUS_LABELS = {
     "INBUSINESS": "营业中",
     "INCONSTRUCTION": "筹建中",
     "CLOSED": "已关闭",
+}
+
+# 门店类别(业务口径)筛选规则: 综合门店(UNION)同时属于销售/售后/交付
+CATEGORY_RULES = {
+    "sales": {"RETAIL", "UNION"},                                                # 销售门店
+    "aftersale": {"AFTERSALE", "SPRAY", "TEMPORARY_AFTERSALE_SUPPORT", "UNION"}, # 售后门店
+    "delivery": {"DELIVER", "TEMPORARY_DELIVER", "UNION"},                       # 交付门店
 }
 
 
@@ -168,6 +176,9 @@ def filter_stores(stores, args):
         result = [s for s in result if s.get("countyName") == args.district]
     if args.type:
         result = [s for s in result if s.get("type") == args.type]
+    if args.category:
+        allowed = CATEGORY_RULES[args.category]
+        result = [s for s in result if s.get("type") in allowed]
     if args.status:
         result = [s for s in result if s.get("status") == args.status]
     if args.keyword:
@@ -337,6 +348,7 @@ def build_parser():
     parser.add_argument("--city", help="按城市名过滤, 如 '深圳'")
     parser.add_argument("--district", help="按区/县名过滤, 如 '南山'")
     parser.add_argument("--type", help="按门店类型过滤: RETAIL/DELIVER/AFTERSALE/SPRAY/UNION/TEMPORARY_DELIVER/TEMPORARY_AFTERSALE_SUPPORT")
+    parser.add_argument("--category", choices=["sales", "aftersale", "delivery"], help="按门店类别过滤: sales=销售门店(RETAIL+UNION) / aftersale=售后门店(AFTERSALE+SPRAY+TEMPORARY_AFTERSALE_SUPPORT+UNION) / delivery=交付门店(DELIVER+TEMPORARY_DELIVER+UNION)")
     parser.add_argument("--status", help="按状态过滤: INBUSINESS/INCONSTRUCTION/CLOSED")
     parser.add_argument("--keyword", help="关键字搜索(匹配门店名或地址)")
     parser.add_argument("--series", help="按车型过滤, 如 '理想L9'")
