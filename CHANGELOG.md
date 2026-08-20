@@ -11,6 +11,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/lang/zh-CN/
 - 新增 `--category` 门店类别筛选: `sales`(销售) / `aftersale`(售后) / `delivery`(交付)
 - 综合门店(UNION) 同时属于销售/售后/交付三类
 
+### Changed
+- 移除 `triggered_when` 自动触发词, 改为仅通过 `/lixiang-stores` 显式触发
+
 ## [1.0.0] - 2026-08-18
 
 ### Added

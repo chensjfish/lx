@@ -2,22 +2,13 @@
 name: lixiang-stores
 version: 1.1.0
 summary: 查询理想汽车全国 1300+ 家门店(零售/交付/售后/喷涂/综合)的信息, 支持省市区/类型/状态/关键字/坐标附近查询, 支持按门店类别(销售/售后/交付)筛选, 可导出 JSON/CSV
-triggered_when:
-  - 查询理想汽车门店
-  - 理想汽车 4S 店 / 零售中心 / 交付中心 / 售后中心
-  - 哪里有理想汽车门店
-  - 理想汽车门店地址电话
-  - 某城市/某地附近的理想门店
-  - 理想汽车试驾车 / 试驾车型
-  - 理想汽车销售门店 / 售后门店 / 交付门店
-  - 导出理想汽车门店数据
-  - Li Auto store / showroom / delivery center
-  - lixiang store
 ---
 
 # lixiang-stores Skill
 
 查询理想汽车全国 1300+ 家门店信息, 数据源为理想汽车官网公开接口。
+
+> **触发方式**: 本 skill 仅通过显式命令 `/lixiang-stores` 触发, 不自动触发。
 
 ## 数据源
 
